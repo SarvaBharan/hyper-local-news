@@ -1,0 +1,23 @@
+# asset_host: http://localhost:8080
+sketches_host:  https://tntdemo-madrid.qtstage.io
+publisher:
+  epaper: "https://epaper.prabhatkhabar.com"
+  defaultImageKey: "prabhatkhabar/2020-02/62bb0105-fbef-4fd5-abc6-f5fc7110e7d6/default_image.png"
+  metypeHost: "https://staging.metype.com"
+  shouldReload: true
+  reloadTimeInMinutes: 2
+  metypeAccountId: "1000446"
+  primaryColor: "#f58220"
+  secondaryColor: "#333333"
+  className: "story-comments-widget"
+  publisher: "tntdemo"
+  refreshTimer: "60000"
+  env: "staging"
+  onesignal:
+    app_id: "6a547f39-4738-47cd-9434-ac68b54a9508"
+    safari_web_id: "web.onesignal.auto.42873e37-42b9-4e5d-9423-af83e9e44ff4"
+    tag_name: "prabhatkhabar-breaking-news"
+  google_tag_manager:
+    id: "GTM-PFHWR27"
+  google_analytics:
+    id: "UA-158668264-1"

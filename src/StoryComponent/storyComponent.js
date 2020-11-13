@@ -1,5 +1,7 @@
 import React from 'react';
 import $ from 'jquery';
+// import { Story } from "@quintype/framework/server/api-client";
+import fetch from 'node-fetch';
 
 export default class StoryComponent extends React.Component {
   constructor(props) {
@@ -7,47 +9,51 @@ export default class StoryComponent extends React.Component {
     
     this.state = {
       headline1: "",
-      location1: "",
-      headline2: "",
-      location2: "",
+      response: [],
+      response1: []
     }
   }
 
   fetchCoord = () => {
     let context = this;
-    $.ajax({
-      url: 'https://run.mocky.io/v3/3e165613-d495-4a4e-be85-7456c2710d59',
-      method: 'GET',
-      success: function(response) {
-        context.setState({
-          headline1: response.story.headline,
-          location1: JSON.stringify(response.story.metadata['story-attributes']['geo-location']),
-        });
-      }
-    });
+    fetch('https://tntdemo-madrid.qtstage.io/api/v1/stories?section-id=48276')
+    .then(res => res.json())
+    .then(body => {
+      body = body.stories.filter(story => story.metadata["story-attributes"]["geo-location"].lat === 12.9322498 && story.metadata["story-attributes"]["geo-location"].lon === 77.5478692)
+      context.setState({
+        response: body
+      })
+    })  
   }
 
-  fetchStory = () => {
+  fetchStory = async () => {
     let context = this;
-    $.ajax({
-      url: 'https://www.boredapi.com/api/activity/',
-      method: 'GET',
-      success: function(response) {
-        context.setState({
-          headline2: response.type,
-        });
-      }
-    });
+    fetch('https://tntdemo-madrid.qtstage.io/api/v1/stories?section-id=48276')
+    .then(res => res.json())
+    .then(body => {
+      body = body.stories.filter(story => story.metadata["story-attributes"]["geo-location"].lat !== 12.9322498 && story.metadata["story-attributes"]["geo-location"].lon !== 77.5478692)
+      context.setState({
+        response1: body
+      })
+    })  
   }
 
   render() {
     return (
       <div>
-        <button class="glow-on-hover" type="button" onClick={this.fetchCoord}>Click to read local news</button>
-        <h3>{this.state.headline1}</h3>
-        <h3>{this.state.location1}</h3>
-        <button class="glow-on-hover" type="button" onClick={this.fetchStory}>Negative Case</button>
-        <h3>{this.state.headline2}</h3>
+        <button className="glow-on-hover" type="button" onClick={this.fetchCoord}>Click to read Girinagar news</button>
+        <div>{this.state.response.map(story => {
+          this.state.response = [];
+          return <h3>{story.headline}</h3>;
+        })}
+        </div>
+        <br />
+        <button className="glow-on-hover" type="button" onClick={this.fetchStory}>Read stories from HSR</button>
+        <div>{this.state.response1.map(story => {
+          this.state.response1 = [];
+          return <h3>{story.headline}</h3>;
+        })}
+      </div>
       </div>
     );
   }
