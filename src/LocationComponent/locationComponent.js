@@ -9,10 +9,8 @@ class LocationComponent extends React.Component {
           <div>Geolocation is not enabled</div>
         ) : this.props.coords ? (
           <div>
-            <div>latitude</div>
-            <div>{this.props.coords.latitude}</div>
-            <div>longitude</div>
-            <div>{this.props.coords.longitude}</div>
+            <h3>Latitude: {this.props.coords.latitude}</h3>
+            <h3>Longitude: {this.props.coords.longitude}</h3>
           </div>
         ) : (
           <div>Getting the location data&hellip; </div>

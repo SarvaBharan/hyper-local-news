@@ -18,8 +18,10 @@ class Demo extends React.Component {
     render() {
         return (
             <div>
-                <button onClick={this.fetchLocation}>Get Location</button>
-                {this.state.showLocation && <LocationComponent />}
+                <h1>Your current location:</h1>
+                <LocationComponent />
+                <p>=================================================</p>
+                <br />
                 <StoryComponent />
             </div>
         )
